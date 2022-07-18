@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(isset($_SESSION['students'])){
+        header("location: dashboard.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +15,8 @@
         <script src="./js/jquery.js"></script>
         <script src="./js/bootstrap/bootstrap.min.js"></script>
         <script src="https://use.fontawesome.com/c91a97da7b.js"></script>
-        <script src="./js/custom.js" ></script>
+        <script src="./js/custom_style.js" ></script>
+        <script src="../app/configuration/server.js" ></script>
         <title>Online Election</title>
     </head>
     <body>
@@ -31,18 +38,21 @@
                     </div>
                     <div class="mode-pane-switcher" >
                         <div class="sign-in-pane">
-                            <form action="#" method="POST" >
-                                <center>
-                                    <img class="rounded-circle shadow d-none" src="./images/logo.jpg" width="120px" height="120px" alt="">
-                                </center>
-                                <h4 class="text-center mb-2" >Welcome Back</h4>
+                            <center>
+                                <img class="rounded-circle shadow d-none" src="./images/logo.jpg" width="120px" height="120px" alt="">
+                            </center>
+                            <h4 class="text-center mb-2" >Welcome Back</h4>
+                            <div id="sign-in-messages" class="alert alert-danger text-center text-danger fw-bold d-none">
+                                
+                            </div>
+                            <form id="form-sign-in" >
                                 <div class="form-group mt-3">
                                     <label class="fw-bold" for="">Email</label>
-                                    <input type="text" placeholder="Email" name="" id="" class="form-control">
+                                    <input type="text" placeholder="Email" name="sign-in-email" id="sign-in-email" class="form-control">
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="fw-bold" for="">Password</label>
-                                    <input type="password" placeholder="Password" name="" id="" class="form-control">
+                                    <input type="password" placeholder="Password" name="sign-in-password" id="sign-in-password" class="form-control">
                                 </div>
                                 <div class="form-group mt-3 text-center">
                                     <button type="submit" class="btn btn-success w-100" >SIGN IN</button>
@@ -53,19 +63,19 @@
                             <form action="#" method="POST" enctype="multipart/form-data" >
                                 <div class="form-group mt-2">
                                     <label class="fw-bold" for="">Email</label>
-                                    <input type="text" placeholder="Email" name="" id="" class="form-control">
+                                    <input type="text" placeholder="Email" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="fw-bold" for="">Student ID</label>
-                                    <input type="text" placeholder="Student ID" name="" id="" class="form-control">
+                                    <input type="text" placeholder="Student ID" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="fw-bold" for="">FirstName</label>
-                                    <input type="text" placeholder="FirstName" name="" id="" class="form-control">
+                                    <input type="text" placeholder="FirstName" class="form-control">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label class="fw-bold" for="">LastName</label>
-                                    <input type="text" placeholder="LastName" name="" id="" class="form-control">
+                                    <input type="text" placeholder="LastName" class="form-control">
                                 </div>
                                 <div class="mt-2 text-center">
                                     <button class="btn btn-danger w-100 fw-bold" >Sign Up</button>
