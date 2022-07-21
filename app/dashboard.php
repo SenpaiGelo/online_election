@@ -9,7 +9,7 @@
         <script src="../public/js/jquery.js"></script>
         <script src="../public/js/bootstrap/bootstrap.min.js"></script>
         <script src="https://use.fontawesome.com/c91a97da7b.js"></script>
-        <script src="./configuration/server-custom.js" ></script>
+        <script src="./configuration/server.js" ></script>
         <title>Administrator | Online Election</title>
     </head>
     <body>
@@ -85,10 +85,10 @@
                 <!-- end start-election -->
                 <div id="students">
                     <div class="container-fluid">
-                        <div class="shadow p-3 m-2 rounded bg-white" >
+                        <div class="shadow p-3 m-2 rounded bg-white navbar" >
                             <h6 class="fw-bolder text-dark text-uppercase" >Students</h6>
-                            <div class="input-group mb-3">
-                                <input id="student-search-id" type="text" class="form-control" placeholder="Search ID" >
+                            <div class="d-flex">
+                                <input id="student-search-id" type="text" placeholder="Search ID" >
                                 <div class="input-group-append">
                                     <button id="student-search-btn" class="btn btn-primary" >Search</button>
                                 </div>
@@ -129,7 +129,42 @@
                             <h6 class="fw-bolder text-dark text-uppercase" >Partylists</h6>
                         </div>
                         <div class="shadow p-2 m-2 mt-3 rounded bg-white" >
-                            
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <h6 class="fw-light" >Preview Logo</h6>
+                                    <center>
+                                        <img id="previewlogo" src="./includes/images//partylist-logo/default-logo-partylist.png" width="128px" height="128px" alt="">
+                                    </center>
+                                </div>
+                                <div class="col-sm-8">
+                                    <form id="form-partylist" enctype="multipart/form-data" >
+                                        <input type="hidden" name="method" value="create" >
+                                        <div class="form-group">
+                                            <label for="" class="fw-bold" >Name</label>
+                                            <input type="text" name="partylist-name" id="partylist-name" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="fw-bold" >Logo</label>
+                                            <input type="file" name="partylist-logo" id="partylist-logo" class="form-control">
+                                        </div>
+                                        <div class="text-end mt-3">
+                                            <button type="submit" class="btn btn-primary">ADD PARTYLIST</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <table class="mt-3 table table-striped table-bordered table-responsive" >
+                                <thead class="bg-dark text-uppercase text-white" >
+                                    <tr>
+                                        <th>Logo</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fetchPartylist" >
+                                    
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

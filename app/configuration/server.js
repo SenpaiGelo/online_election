@@ -1,6 +1,7 @@
 $(document).ready(()=>{
 	authenticator()
 	students()
+	partylists()
 })
 
 var authenticator = () =>{
@@ -115,6 +116,87 @@ var students = () =>{
 		})
 	}
 	searchstudent()
+
+}
+
+var partylists = () =>{
+
+	var previewLogo = () =>{
+		$(document).on('change', '#partylist-logo' , ()=>{
+            if($('#partylist-logo').val() == ""){
+                $('#previewlogo').attr('src' , "./includes/images//partylist-logo/default-logo-partylist.png");
+            }
+            else{
+                $('#previewlogo').attr('src' , URL.createObjectURL(event.target.files[0]));
+            }
+        })
+	}
+	previewLogo()
+
+	var create = () =>{
+		$('#form-partylist').submit(function(e){
+			e.preventDefault()
+			$.ajax({
+				url: "./views/PartylistView.php",
+				method: "POST",
+				data: new FormData(this),
+				processData: false,
+				contentType: false,
+				dataType: "json",
+				success: function(response){
+					if(response.status == "success"){
+						alert(response.messages)
+						$('#form-partylist')[0].reset();
+						$('#previewlogo').attr('src' , "./includes/images//partylist-logo/default-logo-partylist.png");
+						view()
+					}
+					else{
+						alert(response.messages)
+					}
+				}
+			})
+		})
+	}
+	create()
+
+	var view = () =>{
+		$.ajax({
+			url: "./views/PartylistView.php",
+			method: "POST",
+			data: {"method":"view"},
+			dataType: 'json',
+			success: (response)=>{
+				$('#fetchPartylist').html("")
+				$('#fetchPartylist').html(response)
+			}
+		})
+	}
+	view()
+
+	var del = () =>{
+		$(document).on('click','#del-partylist', function(){
+			
+			var remove = confirm("Delete Partylist")
+			if(remove){
+				$.ajax({
+					url: "./controllers/PartylistController.php",
+					method: "POST",
+					data: {"method":"del", "id":$(this).attr('data-id') , "logo":$(this).attr('data-logo') },
+					dataType: 'json',
+					success: (response)=>{
+						if(response.status == "success"){
+							alert(response.messages)
+							view()
+						}
+					}
+				})
+			}
+			else{
+				alert("cancelled")
+			}
+		})
+	}
+	del()
 
 }
 
